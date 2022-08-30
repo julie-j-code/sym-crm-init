@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<main role="main">
+
+    <div class="container-fluid bg-light p-5 my-5">
+        <div class="container mx-auto pt-5">
+            <h1 class="display-3 mb-5">Bonjour !</h1>
+            <p>Ceci est un annuaire utilisateur.
+            </p>
+            <p>Pour pouvoir visualiser la liste des inscrits ou demander à y figurer, vous devez au préalable vous
+                identifier.
+            </p>
+            <p>Si vous n'avez pas de compte actif, merci de vous enregistrer.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            {% for user in users %}
+            <div class="col-md-4">
+                <h2>Utilisateur {{user.id}} : {{user.lastName}} {{user.firstName}}</h2>
+                <p>Tel : {{user.tel}} - Email : {{user.email}}</p>
+
+
+            </div> <!-- /container -->
+            {%endfor%}
+
+        </div>
+    </div>
+
+</main>
+{% endblock %}
