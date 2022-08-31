@@ -30,14 +30,17 @@ class UsersController extends AbstractController
             $name = $propertySearch->getName();
             //on récupère le tel de l'utilisateur renseigné dans le formulaire dans l'hypothèse où c'est cette option qui sert de filtre et on nettoie
             $badChar = array(" ","(",")","+");
-            $telToFind = str_replace($badChar, '', $propertySearch->getTel());
+            $telToFind = $propertySearch->getTel();
+            // $telToFind = str_replace($badChar, '', $propertySearch->getTel());
+            // str_replace est préférable. Ici, le problème est que je récupère avec Faker des fausses données dont le format est aléatoire. Y a de nombreux formats pour les téléphones qu'on imposerait en vérité au moment de l'inscription des utilisateurs
             
             if ($name != "") {
                 //si on a fourni un nom d'utilisateur, on va n'afficher que les utilisateurs ayant ce nom
                 $users = $repo->findBy(['lastName' => $name]);
             } elseif ($telToFind != "") {                
                 // on va n'afficher que les utilisateurs ayant ce tel
-                $users = $repo->findBy(['tel' => $telToFind ]);
+                $users = $repo->findBy([
+                    'tel' => $telToFind ]);
             } else {
                 $users = $repo->findAll();
             }
