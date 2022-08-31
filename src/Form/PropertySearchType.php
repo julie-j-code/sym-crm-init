@@ -20,10 +20,18 @@ class PropertySearchType extends AbstractType
                     'required' => false,
                     'placeholder' => 'Recherche par Nom',
                 ]
-                ])
-                
-                
-            
+            ])
+
+            ->add('tel', null, [
+                'label' => 'Recherche par Tel',
+                'attr' => [
+                    'required' => false,
+                    'placeholder' => 'Recherche par Tel',
+                ]
+            ])
+
+
+
             ->add('activer', SubmitType::class);
     }
 

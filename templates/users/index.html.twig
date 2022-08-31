@@ -21,8 +21,9 @@
 
             {{ form_start(formSearch) }}
 
-            <div class="d-flex bg-light py-5 rounded w-50">
-                {{ form_widget(formSearch.name, {'attr': {'class': 'form-control'}}) }}
+            <div class="d-flex align-items-center bg-light py-5 rounded w-50">
+                {{ form_widget(formSearch.name, {'attr': {'class': 'form-control'}}) }} <span class="mx-3"> OU </span>
+                {{ form_widget(formSearch.tel, {'attr': {'class': 'form-control'}}) }}
                 {{ form_widget(formSearch.activer, {'attr': {'class': 'form-control btn btn-primary w-25 ms-2'}}) }}
             </div>
             {{ form_end(formSearch) }}
