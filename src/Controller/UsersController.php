@@ -28,18 +28,16 @@ class UsersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //on récupère le nom de l'utilisateur renseigné dans le formulaire dans l'hypothèse où c'est cette option qui sert de filtre
             $name = $propertySearch->getName();
-            //on récupère le tel de l'utilisateur renseigné dans le formulaire dans l'hypothèse où c'est cette option qui sert de filtre
-            $telToFind = $propertySearch->getTel();
+            //on récupère le tel de l'utilisateur renseigné dans le formulaire dans l'hypothèse où c'est cette option qui sert de filtre et on nettoie
+            $badChar = array(" ","(",")","+");
+            $telToFind = str_replace($badChar, '', $propertySearch->getTel());
+            
             if ($name != "") {
                 //si on a fourni un nom d'utilisateur, on va n'afficher que les utilisateurs ayant ce nom
                 $users = $repo->findBy(['lastName' => $name]);
-            } elseif ($telToFind != "") {
-                //si on a fourni un tel d'utilisateur
-                // on devra faire en sorte de le nettoyer
-                // todo...
-                
+            } elseif ($telToFind != "") {                
                 // on va n'afficher que les utilisateurs ayant ce tel
-                $users = $repo->findBy(['tel' => $telToFind]);
+                $users = $repo->findBy(['tel' => $telToFind ]);
             } else {
                 $users = $repo->findAll();
             }
