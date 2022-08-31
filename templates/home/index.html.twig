@@ -6,34 +6,18 @@
 <main role="main">
 
     <div class="container-fluid bg-light p-5 my-5">
-        <div class="container mx-auto pt-5">
+        <div class="container mx-auto pt-5 rounded">
             <h1 class="display-3 mb-5">Bonjour !</h1>
             <p>Ceci est un annuaire utilisateur.
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi assumenda exercitationem vero pariatur vitae, tenetur quaerat, autem enim blanditiis itaque debitis, recusandae laboriosam incidunt doloremque dolores nobis quidem eaque. Dignissimos.</p>
             </p>
-            <p>Pour pouvoir visualiser la liste des inscrits ou demander à y figurer, vous devez au préalable vous
-                identifier.
+            {% if not is_granted('ROLE_USER') %}
+            <p>Pour pouvoir visualiser la liste des inscrits ou demander à y figurer, vous devez au préalable <a href="{{path('app_login')}}">vous identifier</a>.
             </p>
-            <p>Si vous n'avez pas de compte actif, merci de vous enregistrer.
+            <p>Si vous n'avez pas de compte actif, merci de <a href="{{path('app_register')}}">vous enregistrer</a>.
             </p>
+            {% endif %}
         </div>
     </div>
-
-    {% if is_granted('ROLE_USER') %}
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            {% for user in users %}
-            <div class="col-md-4">
-                <h2>Utilisateur {{user.id}} : {{user.lastName}} {{user.firstName}}</h2>
-                <p>Tel : {{user.tel}} - Email : {{user.email}}</p>
-
-
-            </div> <!-- /container -->
-            {%endfor%}
-
-        </div>
-    </div>
-    {% endif %}
-
 </main>
 {% endblock %}

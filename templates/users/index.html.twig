@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UsersController!{% endblock %}
+
+{% block body %}
+<main role="main">
+
+    <div class="container-fluid bg-light p-5 my-5">
+        <div class="container mx-auto pt-5 rounded"">
+            <h1 class=" display-3 mb-5">{{controller_name}}</h1>
+
+            {% if not is_granted('ROLE_USER') %}
+            <p>Pour visualiser la liste des inscrits merci de
+                <a href="{{path('app_login')}}">vous identifier</a>
+            </p>
+            {% endif %}
+
+
+            {% if is_granted('ROLE_USER') %}
+
+
+            {{ form_start(formSearch) }}
+
+            <div class="d-flex bg-light py-5 rounded w-50">
+                {{ form_widget(formSearch.name, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(formSearch.activer, {'attr': {'class': 'form-control btn btn-primary w-25 ms-2'}}) }}
+            </div>
+            {{ form_end(formSearch) }}
+
+            <div class="row p-2">
+                {% for user in users %}
+                <div class="card col-sm-4 p-0">
+                    <div class="card-header">Utilisateur {{user.id}}</div>
+                    <div class="card-body">
+                        <h5>Nom : {{user.lastName}}</h5>
+                        {% if user.firstName %}
+                        <p>Prénom : {{user.firstName}}</p>
+                        {% endif %}
+                        <p class="h6">Tel : {{user.tel}}</p>
+                        <p>Email : {{user.email}}</p>
+                        <a href="#" class="btn btn-primary">Détails</a>
+                    </div>
+                </div>
+                {%endfor%}
+
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+
+
+</main>
+{% endblock %}

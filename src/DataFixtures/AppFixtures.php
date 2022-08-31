@@ -40,7 +40,7 @@ class AppFixtures extends Fixture
             ->setEmail($this->faker->email())
             ->setRoles(['ROLE_USER'])
             ->setPassword($this->passwordEncoder->hashPassword($user, 'password'))
-            ->setTel($this->faker->phoneNumber());
+            ->setTel($this->faker->mobileNumber());
 
             $users[] = $user;
             $manager->persist($user);
