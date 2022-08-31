@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\PropertySearch;
 use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -56,28 +57,36 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         $this->add($user, true);
     }
 
-//    /**
-//     * @return Users[] Returns an array of Users objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Users[] Returns an array of Users objects
+     */
+    public function findBySearchFilter(PropertySearch $propertySearch): array
+    {
+        $qb = $this->createQueryBuilder('u');
 
-//    public function findOneBySomeField($value): ?Users
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        if ($propertySearch->getName() !== null) {
+            $qb->where('u.lastName=:name')
+                ->setParameter('name', $propertySearch->getName());
+        }
+
+        if ($propertySearch->getTel() !== null) {
+            $qb->where('u.tel LIKE :telToFind')
+                ->setParameter('telToFind','%'.$propertySearch->getTel().'%');
+        }
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+
+
+    //    public function findOneBySomeField($value): ?Users
+    //    {
+    //        return $this->createQueryBuilder('u')
+    //            ->andWhere('u.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
