@@ -64,10 +64,6 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
     {
         $qb = $this->createQueryBuilder('u');
 
-        // foreach ($variable as $key => $value) {
-        //     # code...
-        // }
-
         if ($propertySearch->getName() !== null) {
             $qb->where('u.lastName=:name')
                 ->setParameter('name', $propertySearch->getName());
@@ -77,15 +73,10 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
             $telToFind=str_replace(' ','',$propertySearch->getTel());
             $telToFind=substr($telToFind,-9);
             // dd($telToFind);
-            $qb->where("replace(u.tel, ' ','') LIKE :telToFind")
+            $qb->having("replace(u.tel, ' ','') LIKE :telToFind")
                 ->setParameter('telToFind','%'.$telToFind.'%');
             // $qb->where('u.tel LIKE :telToFind')
-            //     ->setParameter('telToFind','%'.$propertySearch->getTel().'%');
-
-
-
-
-                
+            //     ->setParameter('telToFind','%'.$propertySearch->getTel().'%');              
                 
         }
 
