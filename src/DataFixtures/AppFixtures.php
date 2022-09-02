@@ -26,6 +26,9 @@ class AppFixtures extends Fixture
         $admin->setFirstName('Julie')
             ->setLastName('Jeannet')
             ->SetEmail('jeannet.julie@gmail.com')
+            ->setAddress($this->faker->address())
+            ->setCp($this->faker->postcode())
+            ->setCity($this->faker->city())
             ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
             ->setPassword($this->passwordEncoder->hashPassword($admin, 'admin'))
             ->setTel('0667001438');
@@ -33,11 +36,14 @@ class AppFixtures extends Fixture
         $users[] = $admin;
         $manager->persist($admin);
         
-        for ($i=1; $i <= 50; $i++) { 
+        for ($i=1; $i <= 17; $i++) { 
             $user = new Users();
             $user->setFirstName($this->faker->firstName())
             ->setLastName($this->faker->lastName())
             ->setEmail($this->faker->email())
+            ->setAddress($this->faker->address())
+            ->setCp($this->faker->postcode())
+            ->setCity($this->faker->city())
             ->setRoles(['ROLE_USER'])
             ->setPassword($this->passwordEncoder->hashPassword($user, 'password'))
             ->setTel($this->faker->mobileNumber());

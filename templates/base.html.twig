@@ -43,7 +43,7 @@
     
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="nav-item active">
-                            <a class="nav-link" href="">Votre profile
+                            <a class="nav-link" href="{{path('user_edit', {'id':app.user.id})}}">Votre profil
                             </a>
                         </li>
                         <li class="nav-item">

@@ -39,11 +39,15 @@
                         {% endif %}
                         <p class="h6">Tel : {{user.tel}}</p>
                         <p>Email : {{user.email}}</p>
-                        <a href="#" class="btn btn-primary">Détails</a>
+                        <a href="{{path('user_show',{'id':user.id})}}" class="btn btn-primary">Détails</a>
                     </div>
                 </div>
                 {%endfor%}
+  
 
+            </div>
+            <div>
+                {{ knp_pagination_render(users,  'base/pagination.html.twig' ) }}
             </div>
         </div>
         {% endif %}

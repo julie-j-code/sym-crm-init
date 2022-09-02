@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+
+<main role="main">
+
+    <div class="container-fluid bg-light p-5 my-5">
+        <div class="container mx-auto pt-5 rounded"">
+            <h1 class=" display-3 mb-5">{{controller_name}} {{ user.id }}</h1>
+
+
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Tel</th>
+                        <td>{{ user.tel }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ user.lastName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prénom</th>
+                        <td>{{ user.firstName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresse</th>
+                        <td>{{ user.address }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cp</th>
+                        <td>{{ user.cp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ville</th>
+                        <td>{{ user.city }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        {% if app.user.id == user.id %}
+        <div class="container mx-auto pt-5 rounded d-flex">
+            <a class="btn btn-primary" href=" {{ path('listing') }}">back to list</a><a class="btn btn-warning ms-2"
+                href="{{path('user_show',{'id':user.id})}}">edit</a>
+            {{ include('users/_delete_form.html.twig') }}
+        </div>
+        {% endif %}
+
+    </div>
+    {% endblock %}
