@@ -19,7 +19,7 @@
             {% if is_granted('ROLE_USER') %}
 
 
-            {{ form_start(formSearch) }}
+            {{ form_start(formSearch, {'attr': {'id': 'julie'}}) }}
 
 
             <div id="mySearch" class="d-flex align-items-center bg-light py-5 rounded w-50">
@@ -73,19 +73,24 @@
     }
 
     console.log(inputSearchEmpty);
-
     // impeccable !
-    // inputSearchEmpty = 2 ? alert("vide") : inputSearchEmpty;
-
-
+    // inputSearchEmpty = 2 ? alert("vide") : inputSearchEmpty;   
     if (inputSearchEmpty != 2) {
         const btn = document.createElement("button");
         btn.className = "btn btn-warning ms-2"
-        btn.textContent = "reset";
-        btn.addEventListener("click", () => alert("cliqué !!!"));
-        // on l'accroche ou ? 
+        btn.textContent = "Reset";
+        // btn.addEventListener("click", () => alert("cliqué !!!"));
         document.getElementById("mySearch").appendChild(btn);
-    } 
+        btn.addEventListener("click",function (event) {
+        event.preventDefault();
+        for (i of inputSearch){
+            i.value=""
+        }
+        document.getElementById("julie").submit();
+    });
+    }
+
+
 
     // impeccable ! 
     // function myFunction() {
