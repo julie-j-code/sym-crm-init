@@ -6,8 +6,8 @@
 <main role="main">
 
     <div class="container-fluid bg-light p-5 my-5">
-        <div class="container mx-auto pt-5 rounded"">
-            <h1 class=" display-3 mb-5">{{controller_name}}</h1>
+        <div class="container mx-auto pt-5 rounded">
+            <h1 class="display-3 mb-5">{{controller_name}}</h1>
 
             {% if not is_granted('ROLE_USER') %}
             <p>Pour visualiser la liste des inscrits merci de
@@ -21,12 +21,14 @@
 
             {{ form_start(formSearch) }}
 
-            <div class="d-flex align-items-center bg-light py-5 rounded w-50">
+
+            <div id="mySearch" class="d-flex align-items-center bg-light py-5 rounded w-50">
                 {{ form_widget(formSearch.name, {'attr': {'class': 'form-control'}}) }} <span class="mx-3"> OU </span>
                 {{ form_widget(formSearch.tel, {'attr': {'class': 'form-control'}}) }}
                 {{ form_widget(formSearch.activer, {'attr': {'class': 'form-control btn btn-primary w-25 ms-2'}}) }}
             </div>
             {{ form_end(formSearch) }}
+
 
             <div class="row p-2">
                 {% for user in users %}
@@ -41,13 +43,14 @@
                         <p>Email : {{user.email}}</p>
                         <a href="{{path('user_show',{'id':user.id})}}" class="btn btn-primary">Détails</a>
                     </div>
+
                 </div>
                 {%endfor%}
-  
+
 
             </div>
             <div>
-                {{ knp_pagination_render(users,  'base/pagination.html.twig' ) }}
+                {{ knp_pagination_render(users, 'base/pagination.html.twig' ) }}
             </div>
         </div>
         {% endif %}
@@ -55,6 +58,55 @@
     </div>
 
 
-
 </main>
+
+
+<script>
+
+    var btn = document.querySelector('#property_search_activer');
+    var inputSearch = document.querySelectorAll('input');
+    console.log("type", typeof (inputSearch));
+    console.log(btn);
+    var inputSearchEmpty = 0;
+    for (input of inputSearch) {
+        input.value == "" ? inputSearchEmpty++ : input.classList.add('bg-light');
+    }
+
+    console.log(inputSearchEmpty);
+
+    // impeccable !
+    // inputSearchEmpty = 2 ? alert("vide") : inputSearchEmpty;
+
+
+    if (inputSearchEmpty != 2) {
+        const btn = document.createElement("button");
+        btn.className = "btn btn-warning ms-2"
+        btn.textContent = "reset";
+        btn.addEventListener("click", () => alert("cliqué !!!"));
+        // on l'accroche ou ? 
+        document.getElementById("mySearch").appendChild(btn);
+    } 
+
+    // impeccable ! 
+    // function myFunction() {
+    //     const btn = document.createElement("button");
+    //     btn.className = "btn btn-light ms-2"
+    //     btn.textContent = "reset";
+    //     btn.addEventListener("click", () => alert("cliqué"));
+    //     document.getElementById("mySearch").appendChild(btn);
+    // }
+
+    // console.log(inputSearchEmpty);
+    // btn.addEventListener("click", function (event) {
+    //     event.preventDefault();
+    //     console.log("cliqué");
+    //     btn.classList.remove("btn-primary")
+    //     btn.classList.add("btn-success")
+    // });
+
+
+// btn.classList.remove("btn-primary")
+// btn.classList.add("btn-success")
+
+</script>
 {% endblock %}

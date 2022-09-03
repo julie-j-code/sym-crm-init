@@ -15,10 +15,11 @@ class PropertySearchType extends AbstractType
     {
         $builder
             ->add('name', null, [
+                
                 'label' => 'Recherche par Nom',
                 'attr' => [
                     'required' => false,
-                    'placeholder' => 'Recherche par Nom',
+                    'placeholder' => 'Recherche par Nom'
                 ]
             ])
 
@@ -29,8 +30,6 @@ class PropertySearchType extends AbstractType
                     'placeholder' => 'Recherche par Tel',
                 ]
             ])
-
-
 
             ->add('activer', SubmitType::class);
     }
