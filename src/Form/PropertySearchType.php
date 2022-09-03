@@ -31,7 +31,7 @@ class PropertySearchType extends AbstractType
                 ]
             ])
 
-            ->add('activer', SubmitType::class);
+            ->add('rechercher', SubmitType::class);
     }
 
 
